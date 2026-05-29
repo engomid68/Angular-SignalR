@@ -1,0 +1,23 @@
+<div class="users-container">
+    <h2>📋 لیست کاربران</h2>
+    <p class="info">✅ داده‌ها قبل از بارگذاری صفحه از Resolver دریافت شده‌اند</p>
+
+    <div class="users-grid">
+        @for (user of users; track user.id) {
+        <div class="user-card">
+            <h3>{{ user.name }}</h3>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Phone:</strong> {{ user.phone }}</p>
+            <a [routerLink]="['/user', user.id]" class="view-link">مشاهده جزئیات →</a>
+        </div>
+        }
+    </div>
+
+    <div class="resolver-info">
+        <h4>ℹ️ اطلاعات Resolver</h4>
+        <p>⏱️ زمان دریافت داده: {{ loadTime | date:'HH:mm:ss' }}</p>
+        <p>📊 تعداد کاربران: {{ users.length }}</p>
+        <p>✅ وضعیت: داده‌ها با موفقیت قبل از بارگذاری صفحه آماده شدند</p>
+    </div>
+</div>

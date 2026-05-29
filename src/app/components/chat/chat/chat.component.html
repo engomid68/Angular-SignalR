@@ -1,0 +1,47 @@
+<div class="chat-container">
+    <div class="login-container" *ngIf="!isConnected">
+        <div class="login-form">
+            <h2>Enter Chat</h2>
+            <input [(ngModel)]="username" placeholder="Username" (keyup.enter)="connect()">
+            <button (click)="connect()">Join Chat</button>
+        </div>
+    </div>
+
+    <div *ngIf="isConnected" class="chat-main">
+        <div class="sidebar">
+            <h3>Online Users ({{users.length}})</h3>
+            <ul>
+                <li *ngFor="let user of users" [class.current-user]="user === username">
+                    {{user}}
+                    <button *ngIf="user !== username" (click)="setPrivateChat(user)" class="private-btn">
+                        PM
+                    </button>
+                </li>
+            </ul>
+            <div class="private-chat-info" *ngIf="privateChatWith">
+                Private chatting with: {{privateChatWith}}
+                <button (click)="clearPrivateChat()">Switch to Public</button>
+            </div>
+        </div>
+
+        <div class="chat-area">
+            <div class="messages">
+                <div *ngFor="let msg of messages" class="message">
+                    <strong>{{msg.user}}</strong>
+                    <span class="timestamp">{{msg.timestamp | date:'shortTime'}}</span>
+                    <div>{{msg.message}}</div>
+                </div>
+                <div *ngFor="let msg of privateMessages" class="message private">
+                    <strong>[PM] {{msg.user}}</strong>
+                    <span class="timestamp">{{msg.timestamp | date:'shortTime'}}</span>
+                    <div>{{msg.message}}</div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <input [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Type your message...">
+                <button (click)="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+</div>

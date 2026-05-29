@@ -1,0 +1,31 @@
+<div class="app-container">
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h2>🚀 Angular Online Chat SignalR Demo</h2>
+        </div>
+        <div class="nav-links">
+            <a routerLink="/users" routerLinkActive="active">
+                📋 لیست کاربران
+            </a>
+            <a routerLink="/user/1" routerLinkActive="active">
+                👤 کاربر نمونه
+            </a>
+            <a routerLink="chat" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+               چت آنلاین
+            </a>
+        </div>
+        <div class="nav-status">
+            <span *ngIf="isLoading" class="loading-indicator">
+                ⏳ در حال بارگذاری...
+            </span>
+        </div>
+    </nav>
+
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+
+    <footer class="footer">
+
+    </footer>
+</div>

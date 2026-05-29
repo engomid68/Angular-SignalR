@@ -1,0 +1,36 @@
+<div class="custom-select" [class.disabled]="disabled()">
+    <div class="select-header" (click)="toggleDropdown()" [class.open]="isOpen()">
+        <span class="selected-value">
+            {{ getSelectedLabel() || placeholder }}
+        </span>
+        <span class="arrow" [class.rotated]="isOpen()">▼</span>
+    </div>
+
+    <div class="dropdown" *ngIf="isOpen() && !disabled()">
+        <div class="search-box" *ngIf="searchable">
+            <input type="text" 
+                   [(ngModel)]="searchTerm" 
+                   (ngModelChange)="filterOptions()"
+                   placeholder="جستجو..."
+                   (click)="$event.stopPropagation()">
+        </div>
+
+        <div class="options-list">
+            @for (option of filteredOptions(); track option.value) {
+                <div class="option" 
+                     [class.selected]="isSelected(option)"
+                     (click)="selectOption(option)">
+                    <span class="option-label">{{ option.label }}</span>
+                    @if (showValue) {
+                        <span class="option-value">{{ option.value }}</span>
+                    }
+                    @if (isSelected(option)) {
+                        <span class="checkmark">✓</span>
+                    }
+                </div>
+            } @empty {
+                <div class="no-options">گزینه‌ای یافت نشد</div>
+            }
+        </div>
+    </div>
+</div>

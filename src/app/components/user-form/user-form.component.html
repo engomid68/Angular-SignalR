@@ -1,0 +1,77 @@
+<div class="form-container">
+    <h2>فرم ثبت نام</h2>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <!-- Basic Input -->
+        <div class="form-group">
+            <label>نام کامل</label>
+            <input type="text" formControlName="name" placeholder="نام خود را وارد کنید.">
+            @if(userForm.get('name')?.invalid && userForm.get('name')?.touched) {
+                <div class="error">
+                    نام اجباری است
+                </div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label>کشور</label>
+            <app-custom-select formControlName="country" [options]="countryOptions" placeholder="کشور خود را انتخاب کنید."
+                [searchable]="true" [showValue]="false">
+            </app-custom-select>
+
+            @if(userForm.get('country')?.invalid && userForm.get('country')?.touched) {
+                <div class="error">
+                    لطفا یک کشور را انتخاب کنید
+                </div>
+            }
+        </div>
+
+        <div class="form-group">
+            <label>شهر</label>
+            <app-custom-select formControlName="city" [options]="cityOptions" placeholder="شهر خود را انتخاب کنید."
+                [searchable]="true" [showValue]="true">
+            </app-custom-select>
+            <div class="hint"> کد شهرها نمایش داده می شوند باعلامت های قابل جستجو</div>
+        </div>
+
+        <div class="form-group">
+            <label>اولین زبان برنامه نویسی</label>
+            <app-custom-select formControlName="language" [options]="languageOptions" placeholder="زبان خود را انتخاب کنید"
+                [searchable]="true" [showValue]="false">
+            </app-custom-select>
+        </div>
+
+        <div class="form-group">
+            <label>سطح</label>
+            <app-custom-select formControlName="experience" [options]="experienceOptions"
+                placeholder="سطح تجربه خود را وارد کنید." [searchable]="false" [showValue]="false">
+            </app-custom-select>
+        </div>
+
+        <!-- Disabled Select Example -->
+        <div class="form-group">
+            <label>ساختمان</label>
+            <app-custom-select formControlName="department" [options]="departmentOptions" placeholder="ساختمان"
+                [disabled]="true" [searchable]="false">
+            </app-custom-select>
+            <small class="hint">انتخاب غیر فعال است</small>
+        </div>
+
+        <!-- Form Values Display -->
+        <div class="form-values">
+            <h3>مقادیر فرم</h3>
+            <pre>{{ userForm.value | json }}</pre>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" [disabled]="userForm.invalid">ثبت</button>
+            <button type="button" (click)="resetForm()">پاک کردن</button>
+            <button type="button" (click)="setDefaultValues()">مقادیر پیش فرض</button>
+        </div>
+
+        @if(submitted) {
+            <div class="status">
+                ✅ فرم با موفقیت ثبت شد!
+            </div>
+        }
+    </form>
+</div>
