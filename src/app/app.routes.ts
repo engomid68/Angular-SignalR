@@ -6,6 +6,7 @@ import { UserDetailComponent } from './components/user-detail/user-detail/user-d
 import { ErrorComponent } from './components/error/error/error.component';
 import { LoginComponent } from './components/login/login/login.component';
 import { ChatComponent } from './components/chat/chat/chat.component';
+import { CounterComponent } from './components/counter/counter.component';
 
 export const routes: Routes = [
   // {
@@ -25,8 +26,12 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'counter',
+    component: CounterComponent,
+  },
+  {
     path: '',
-    component: ChatComponent,
+    component: CounterComponent,
   },
   {
     path: 'user/:id',

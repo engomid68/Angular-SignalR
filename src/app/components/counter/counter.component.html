@@ -1,0 +1,10 @@
+<div style="text-align:center; margin-top:50px">
+    <h1>NgRx Counter - Angular 19</h1>
+    <!-- <h2>Count: {{ count() }}</h2> -->
+     <input type="text" [value]="count()">
+    <div style="display: flex; gap: 10px; justify-content: center">
+        <button (click)="onIncrement()">➕ Increase</button>
+        <button (click)="onDecrement()">➖ Decrease</button>
+        <button (click)="onReset()">🔄 Reset</button>
+    </div>
+</div>
